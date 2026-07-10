@@ -84,7 +84,11 @@ namespace NumbersBlast.Opponent
             }
 
             Canvas canvas = view.GetComponentInParent<Canvas>();
-            Transform layer = canvas != null ? canvas.transform : view.transform.root;
+            // Held pieces get reparented to render above the board — but INSIDE GameplayRoot (the
+            // board's parent), never the canvas root: a return-to-menu mid-act hides GameplayRoot,
+            // and a piece parented above it would keep floating over the main menu.
+            Transform layer = board.transform.parent != null ? board.transform.parent
+                : (canvas != null ? canvas.transform : view.transform.root);
             // Overlay canvases resolve screen points with a null camera; match the player's drag path.
             Camera cam = (canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay) ? canvas.worldCamera : null;
             RectTransform rect = view.RectTransform;
