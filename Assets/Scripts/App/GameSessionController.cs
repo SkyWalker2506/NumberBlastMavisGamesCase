@@ -102,41 +102,11 @@ namespace NumbersBlast.App
         /// </summary>
         private void SetState(GameState state)
         {
-            if (!IsLegalTransition(_state, state))
-            {
-                // Warn only, never block — a cheap tripwire if the flow ever grows an unintended edge.
-                Debug.LogWarning($"[NumbersBlast] Unexpected state transition {_state} -> {state}");
-            }
-
             _state = state;
             if (settingsGearButton != null)
             {
                 settingsGearButton.interactable = state == GameState.PlayerTurn
                     || state == GameState.OpponentTurn || state == GameState.ResolvingMove;
-            }
-        }
-
-        /// <summary>
-        /// The transitions the flow actually uses. "→ MainMenu" (return/quit) and "→ PlayerTurn"
-        /// (menu start, replay, and tutorial step loads, which can arrive from any state) are always
-        /// legal; the rest must follow the resolve pipeline. Not a state-machine framework — a guard.
-        /// </summary>
-        private static bool IsLegalTransition(GameState from, GameState to)
-        {
-            if (to == GameState.MainMenu || to == GameState.PlayerTurn)
-            {
-                return true;
-            }
-
-            switch (from)
-            {
-                // A player turn ends with a move (→ Resolving) — or with a TIMEOUT, which passes the
-                // turn with no resolve (→ OpponentTurn) or ends the match if no moves remain (→ GameOver).
-                case GameState.PlayerTurn:    return to == GameState.ResolvingMove
-                                                  || to == GameState.OpponentTurn || to == GameState.GameOver;
-                case GameState.ResolvingMove: return to == GameState.OpponentTurn || to == GameState.GameOver;
-                case GameState.OpponentTurn:  return to == GameState.ResolvingMove || to == GameState.GameOver;
-                default:                      return false;
             }
         }
 
