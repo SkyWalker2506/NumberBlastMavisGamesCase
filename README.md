@@ -66,4 +66,4 @@ Kararların gerekçeleri ve detaylı anlatım: **[README.pdf](README.pdf)**
 ## Gelecek geliştirmeler
 
 Rubber-band eşiğine bağlı zorluk seçici · rakip turu için bir üst süre sınırı ·
-ekranda yükselen skor yazıları için havuzlama.
+floating score yazıları için pooling.
