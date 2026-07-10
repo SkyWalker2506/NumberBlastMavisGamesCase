@@ -51,7 +51,8 @@ UI/Input tipini referans etmez.
 - **Part 2:** iki turda da görünen 20 sn sayaç, ekranda görünür timeout cezası, tamamen
   ekran üzerinde oynayan rakip; ayarlar maçı durdurmaz.
 - **AI** oyuncuyla aynı pipeline'la değerlendirir; maç içi rubber-band maçları yakın tutar,
-  bariz en iyi hamle asla pas geçilmez, sahte gezinme asla gerçek hamleden iyi görünmez.
+  bariz en iyi hamle asla kaçırılmaz; rakip, oynayacağından daha iyi görünen bir hücrenin
+  üzerinde sahte şekilde oyalanmaz.
 - DI framework'ü, service locator, event bus, kullanılmayan interface yok.
 
 Kararların gerekçeleri ve detaylı anlatım: **[README.pdf](README.pdf)**
@@ -60,9 +61,9 @@ Kararların gerekçeleri ve detaylı anlatım: **[README.pdf](README.pdf)**
 
 - Tutorial yalnızca ilk açılışta çalışır; menüden tekrar oynatılabilir.
 - Palet dışındaki merge değerleri kararlı bir golden-ratio tonu alır.
-- Rakip turu tipik ~4–5 sn sürer; her zaman gösterdiği sayacın çok içinde biter.
+- Rakip turu tipik olarak 4–5 saniye sürer ve her zaman 20 saniyelik sayaç dolmadan çok önce biter.
 
 ## Gelecek geliştirmeler
 
-Rubber-band eşiğine bağlı zorluk seçici · rakip turu için opsiyonel süre tavanı ·
-uçan skor yazıları için havuzlama.
+Rubber-band eşiğine bağlı zorluk seçici · rakip turu için bir üst süre sınırı ·
+ekranda yükselen skor yazıları için havuzlama.
